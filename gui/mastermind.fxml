@@ -1,0 +1,365 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f1c32" height="500.0" stroke="BLACK" strokeType="INSIDE" width="600.0">
+         <effect>
+            <ImageInput>
+               <source>
+                  <Image url="file:/C:/Users/Jordan/Documents/GitHub/mastermind/pictures/wood.jpg" />
+               </source>
+            </ImageInput>
+         </effect>
+      </Rectangle>
+      <Rectangle arcHeight="20.0" arcWidth="20.0" fill="#b21212" height="120.0" layoutX="45.0" layoutY="14.0" stroke="#00000082" strokeType="OUTSIDE" strokeWidth="2.0" width="410.0">
+         <effect>
+            <ImageInput />
+         </effect>
+      </Rectangle>
+      <HBox layoutX="40.0" layoutY="14.0" prefHeight="120.0" prefWidth="530.0">
+         <children>
+            <Circle fx:id="passwordMove1Slot" fill="#616161f5" layoutX="60.0" layoutY="60.0" radius="40.0" stroke="BLACK" strokeType="INSIDE">
+               <HBox.margin>
+                  <Insets left="20.0" right="10.0" top="5.0" />
+               </HBox.margin>
+               <effect>
+                  <InnerShadow />
+               </effect>
+            </Circle>
+            <Circle fx:id="passwordMove1Image" centerX="30.0" centerY="29.0" fill="WHITE" radius="40.0" stroke="BLACK" strokeType="INSIDE" visible="false">
+               <effect>
+                  <ImageInput x="-10.0" y="-10.0">
+                     <source>
+                        <Image url="file:/C:/Users/Jordan/Documents/GitHub/mastermind/pictures/blue.png" />
+                     </source>
+                  </ImageInput>
+               </effect>
+               <HBox.margin>
+                  <Insets left="-89.0" right="10.0" top="5.0" />
+               </HBox.margin>
+            </Circle>
+            <Circle fx:id="passwordMove2Slot" fill="#636363f5" radius="40.0" stroke="BLACK" strokeType="INSIDE">
+               <HBox.margin>
+                  <Insets left="10.0" right="10.0" top="5.0" />
+               </HBox.margin>
+               <effect>
+                  <InnerShadow />
+               </effect>
+            </Circle>
+            <Circle fx:id="passwordMove2Image" centerX="30.0" centerY="29.0" fill="WHITE" layoutX="41.0" layoutY="41.0" radius="40.0" stroke="BLACK" strokeType="INSIDE" visible="false">
+               <effect>
+                  <ImageInput x="-10.0" y="-10.0">
+                     <source>
+                        <Image url="file:/C:/Users/Jordan/Documents/GitHub/mastermind/pictures/blue.png" />
+                     </source>
+                  </ImageInput>
+               </effect>
+               <HBox.margin>
+                  <Insets left="-89.0" right="10.0" top="5.0" />
+               </HBox.margin>
+            </Circle>
+            <Circle fx:id="passwordMove3Slot" fill="#636363f5" layoutX="60.0" layoutY="60.0" radius="40.0" stroke="BLACK" strokeType="INSIDE">
+               <HBox.margin>
+                  <Insets left="10.0" right="10.0" top="5.0" />
+               </HBox.margin>
+               <effect>
+                  <InnerShadow />
+               </effect>
+            </Circle>
+            <Circle fx:id="passwordMove3Image" centerX="30.0" centerY="29.0" fill="WHITE" layoutX="142.0" layoutY="41.0" radius="40.0" stroke="BLACK" strokeType="INSIDE" visible="false">
+               <effect>
+                  <ImageInput x="-10.0" y="-10.0">
+                     <source>
+                        <Image url="file:/C:/Users/Jordan/Documents/GitHub/mastermind/pictures/blue.png" />
+                     </source>
+                  </ImageInput>
+               </effect>
+               <HBox.margin>
+                  <Insets left="-89.0" right="10.0" top="5.0" />
+               </HBox.margin>
+            </Circle>
+            <Circle fx:id="passwordMove4Slot" fill="#636363f5" layoutX="330.0" layoutY="50.0" radius="40.0" stroke="BLACK" strokeType="INSIDE">
+               <HBox.margin>
+                  <Insets left="10.0" right="10.0" top="5.0" />
+               </HBox.margin>
+               <effect>
+                  <InnerShadow />
+               </effect>
+            </Circle>
+            <Circle fx:id="passwordMove3Image1" centerX="30.0" centerY="29.0" fill="WHITE" layoutX="243.0" layoutY="41.0" radius="40.0" stroke="BLACK" strokeType="INSIDE" visible="false">
+               <effect>
+                  <ImageInput x="-10.0" y="-10.0">
+                     <source>
+                        <Image url="file:/C:/Users/Jordan/Documents/GitHub/mastermind/pictures/blue.png" />
+                     </source>
+                  </ImageInput>
+               </effect>
+               <HBox.margin>
+                  <Insets left="-89.0" top="5.0" />
+               </HBox.margin>
+            </Circle>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <ComboBox promptText="Color" style="-fx-background-color: rgba(255,255,255,.5);" visibleRowCount="8">
+                     <VBox.margin>
+                        <Insets bottom="10.0" />
+                     </VBox.margin>
+                  </ComboBox>
+                  <Button contentDisplay="TEXT_ONLY" mnemonicParsing="false" style="-fx-background-color: rgba(255,255,255,.5);" text="Save" />
+               </children>
+               <HBox.margin>
+                  <Insets left="25.0" />
+               </HBox.margin>
+            </VBox>
+         </children>
+         <padding>
+            <Insets top="15.0" />
+         </padding>
+      </HBox>
+      <HBox fx:id="computerMoves" layoutX="57.0" layoutY="150.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mouseTransparent="true" prefHeight="100.0" prefWidth="500.0">
+         <children>
+            <Circle fx:id="computerMove1Slot" layoutX="330.0" layoutY="60.0" radius="40.0" stroke="BLACK" strokeType="INSIDE">
+               <effect>
+                  <DropShadow offsetX="-1.0" offsetY="1.0" />
+               </effect>
+               <fill>
+                  <RadialGradient centerX="0.6444444444444444" centerY="0.3904761904761904" radius="1.0">
+                     <stops>
+                        <Stop color="#ff7777" />
+                        <Stop color="RED" offset="1.0" />
+                     </stops>
+                  </RadialGradient>
+               </fill>
+               <HBox.margin>
+                  <Insets left="10.0" right="-89.0" />
+               </HBox.margin>
+            </Circle>
+            <Circle fx:id="computerMove1Image" centerX="30.0" centerY="29.0" fill="WHITE" radius="40.0" stroke="BLACK" strokeType="INSIDE">
+               <HBox.margin>
+                  <Insets left="10.0" right="10.0" />
+               </HBox.margin>
+               <effect>
+                  <ImageInput x="-10.0" y="-10.0">
+                     <source>
+                        <Image url="file:/C:/Users/Jordan/Documents/GitHub/mastermind/pictures/blue.png" />
+                     </source>
+                  </ImageInput>
+               </effect>
+            </Circle>
+            <Circle fx:id="computerMove2Slot" layoutX="331.0" layoutY="60.0" radius="40.0" stroke="BLACK" strokeType="INSIDE">
+               <effect>
+                  <DropShadow offsetX="-1.0" offsetY="1.0" />
+               </effect>
+               <fill>
+                  <RadialGradient centerX="0.6444444444444444" centerY="0.3904761904761904" radius="1.0">
+                     <stops>
+                        <Stop color="#ff7777" />
+                        <Stop color="RED" offset="1.0" />
+                     </stops>
+                  </RadialGradient>
+               </fill>
+               <HBox.margin>
+                  <Insets right="-79.0" />
+               </HBox.margin>
+            </Circle>
+            <Circle fx:id="computerMove2Image" centerX="30.0" centerY="29.0" fill="WHITE" radius="40.0" stroke="BLACK" strokeType="INSIDE">
+               <effect>
+                  <ImageInput x="-10.0" y="-10.0">
+                     <source>
+                        <Image url="file:/C:/Users/Jordan/Documents/GitHub/mastermind/pictures/green.png" />
+                     </source>
+                  </ImageInput>
+               </effect>
+               <HBox.margin>
+                  <Insets right="10.0" />
+               </HBox.margin>
+            </Circle>
+            <Circle fx:id="computerMove3Slot" layoutX="331.0" layoutY="60.0" radius="40.0" stroke="BLACK" strokeType="INSIDE">
+               <effect>
+                  <DropShadow offsetX="-1.0" offsetY="1.0" />
+               </effect>
+               <fill>
+                  <RadialGradient centerX="0.6444444444444444" centerY="0.3904761904761904" radius="1.0">
+                     <stops>
+                        <Stop color="#ff7777" />
+                        <Stop color="RED" offset="1.0" />
+                     </stops>
+                  </RadialGradient>
+               </fill>
+               <HBox.margin>
+                  <Insets right="-79.0" />
+               </HBox.margin>
+            </Circle>
+            <Circle fx:id="computerMove3Image" centerX="30.0" centerY="29.0" fill="WHITE" layoutX="132.0" layoutY="31.0" radius="40.0" stroke="BLACK" strokeType="INSIDE">
+               <effect>
+                  <ImageInput x="-10.0" y="-10.0">
+                     <source>
+                        <Image url="file:/C:/Users/Jordan/Documents/GitHub/mastermind/pictures/orange.png" />
+                     </source>
+                  </ImageInput>
+               </effect>
+               <HBox.margin>
+                  <Insets right="10.0" />
+               </HBox.margin>
+            </Circle>
+            <Circle fx:id="computerMove4Slot" layoutX="250.0" layoutY="60.0" radius="40.0" stroke="BLACK" strokeType="INSIDE">
+               <fill>
+                  <RadialGradient centerX="0.6444444444444444" centerY="0.3904761904761904" radius="1.0">
+                     <stops>
+                        <Stop color="#ff7777" />
+                        <Stop color="RED" offset="1.0" />
+                     </stops>
+                  </RadialGradient>
+               </fill>
+               <effect>
+                  <DropShadow offsetX="-1.0" offsetY="1.0" />
+               </effect>
+               <HBox.margin>
+                  <Insets right="-79.0" />
+               </HBox.margin>
+            </Circle>
+            <Circle fx:id="computerMove4Image" centerX="30.0" centerY="29.0" fill="WHITE" layoutX="223.0" layoutY="31.0" radius="40.0" stroke="BLACK" strokeType="INSIDE">
+               <effect>
+                  <ImageInput x="-10.0" y="-10.0">
+                     <source>
+                        <Image url="file:/C:/Users/Jordan/Documents/GitHub/mastermind/pictures/purple.png" />
+                     </source>
+                  </ImageInput>
+               </effect>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </Circle>
+            <GridPane fx:id="computerMovePegs" alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="100.0" HBox.hgrow="NEVER">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints percentHeight="50.0" vgrow="SOMETIMES" />
+                <RowConstraints percentHeight="50.0" vgrow="ALWAYS" />
+              </rowConstraints>
+               <children>
+                  <Rectangle fx:id="computerMovePeg1" arcHeight="5.0" arcWidth="5.0" fill="#616161f5" height="30.0" stroke="BLACK" strokeType="INSIDE" width="30.0" GridPane.halignment="CENTER" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                     <GridPane.margin>
+                        <Insets bottom="20.0" />
+                     </GridPane.margin>
+                     <effect>
+                        <InnerShadow />
+                     </effect>
+                  </Rectangle>
+                  <Rectangle fx:id="computerMovePeg2" arcHeight="5.0" arcWidth="5.0" fill="#616161f5" height="30.0" layoutX="20.0" layoutY="30.0" stroke="BLACK" strokeType="INSIDE" width="30.0" GridPane.columnIndex="1" GridPane.halignment="CENTER">
+                     <GridPane.margin>
+                        <Insets bottom="20.0" />
+                     </GridPane.margin>
+                     <effect>
+                        <InnerShadow />
+                     </effect>
+                  </Rectangle>
+                  <Rectangle fx:id="computerMovePeg3" arcHeight="5.0" arcWidth="5.0" fill="#616161f5" height="30.0" layoutX="70.0" layoutY="30.0" stroke="BLACK" strokeType="INSIDE" width="30.0" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+                     <GridPane.margin>
+                        <Insets bottom="20.0" />
+                     </GridPane.margin>
+                     <effect>
+                        <InnerShadow />
+                     </effect>
+                  </Rectangle>
+                  <Rectangle fx:id="computerMovePeg4" arcHeight="5.0" arcWidth="5.0" fill="#616161f5" height="30.0" layoutX="10.0" layoutY="70.0" stroke="BLACK" strokeType="INSIDE" width="30.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+                     <GridPane.margin>
+                        <Insets bottom="20.0" />
+                     </GridPane.margin>
+                     <effect>
+                        <InnerShadow />
+                     </effect>
+                  </Rectangle>
+               </children>
+               <HBox.margin>
+                  <Insets left="20.0" />
+               </HBox.margin>
+            </GridPane>
+         </children>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+      </HBox>
+      <ScrollPane layoutX="55.0" layoutY="263.0" prefHeight="200.0" prefWidth="500.0">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="487.0">
+               <children>
+                  <Rectangle fx:id="oldMoveBackground" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="200.0" stroke="BLACK" strokeType="INSIDE" width="200.0">
+                     <effect>
+                        <ImageInput>
+                           <source>
+                              <Image url="file:/C:/Users/Jordan/Documents/GitHub/mastermind/pictures/metal.png" />
+                           </source>
+                        </ImageInput>
+                     </effect>
+                  </Rectangle>
+                  <HBox fx:id="oldMoveBox" fillHeight="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="485.0">
+                     <children>
+                        <Circle fx:id="oldMove1Slot" fill="DODGERBLUE" layoutX="60.0" layoutY="60.0" radius="30.0" stroke="BLACK" strokeType="INSIDE" HBox.hgrow="ALWAYS">
+                           <HBox.margin>
+                              <Insets bottom="10.0" left="20.0" right="15.0" top="20.0" />
+                           </HBox.margin>
+                        </Circle>
+                        <Circle fx:id="oldMove2Slot" fill="DODGERBLUE" radius="30.0" stroke="BLACK" strokeType="INSIDE" HBox.hgrow="ALWAYS">
+                           <HBox.margin>
+                              <Insets left="15.0" right="15.0" top="20.0" />
+                           </HBox.margin>
+                        </Circle>
+                        <Circle fx:id="oldMove3Slot" fill="DODGERBLUE" layoutX="60.0" layoutY="60.0" radius="30.0" stroke="BLACK" strokeType="INSIDE" HBox.hgrow="ALWAYS">
+                           <HBox.margin>
+                              <Insets left="15.0" right="15.0" top="20.0" />
+                           </HBox.margin>
+                        </Circle>
+                        <Circle fx:id="oldMove4Slot" fill="DODGERBLUE" layoutX="330.0" layoutY="50.0" radius="30.0" stroke="BLACK" strokeType="INSIDE" HBox.hgrow="ALWAYS">
+                           <HBox.margin>
+                              <Insets left="15.0" right="15.0" top="20.0" />
+                           </HBox.margin>
+                        </Circle>
+                        <Line endX="100.0" endY="95.0" startX="100.0" startY="5.0">
+                           <HBox.margin>
+                              <Insets left="10.0" right="5.0" top="5.0" />
+                           </HBox.margin>
+                        </Line>
+                        <GridPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="100.0">
+                           <children>
+                              <Rectangle fx:id="oldMovePeg1" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="30.0" stroke="BLACK" strokeType="INSIDE" width="30.0" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS" />
+                              <Rectangle fx:id="oldMovePeg2" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="30.0" layoutX="20.0" layoutY="30.0" stroke="BLACK" strokeType="INSIDE" width="30.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
+                              <Rectangle fx:id="oldMovePeg3" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="30.0" layoutX="70.0" layoutY="30.0" stroke="BLACK" strokeType="INSIDE" width="30.0" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+                              <Rectangle fx:id="oldMovePeg4" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="30.0" layoutX="10.0" layoutY="70.0" stroke="BLACK" strokeType="INSIDE" width="30.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+                           </children>
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints maxHeight="50.0" minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="50.0" minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <padding>
+                              <Insets left="10.0" />
+                           </padding>
+                        </GridPane>
+                     </children>
+                  </HBox>
+               </children>
+            </AnchorPane>
+        </content>
+         <effect>
+            <InnerShadow />
+         </effect>
+      </ScrollPane>
+      <Line endX="500.0" layoutX="50.0" layoutY="136.0" stroke="#0000009f" strokeLineCap="ROUND" strokeWidth="3.0" />
+   </children>
+</AnchorPane>
