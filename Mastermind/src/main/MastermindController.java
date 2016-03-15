@@ -1,18 +1,23 @@
+package main;
+
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.HPos;
+import javafx.geometry.Insets;
+import javafx.geometry.VPos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.effect.ImageInput;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 
 import java.io.File;
@@ -30,10 +35,25 @@ public class MastermindController implements Initializable {
     private Image red = new Image(new File("Mastermind/src/main/pictures/red.png").toURI().toString());
     private Image white = new Image(new File("Mastermind/src/main/pictures/white.png").toURI().toString());
     private Image yellow = new Image(new File("Mastermind/src/main/pictures/yellow.png").toURI().toString());
-    private Image currentColor=null;
+//    private Image currentColor = null;
+
+    //TEST CODE
+    private String currentColorName = null;
+    private String passwordMove1Color;
+    private String passwordMove2Color;
+    private String passwordMove3Color;
+    private String passwordMove4Color;
+    private String computerMove1Color;
+    private String computerMove2Color;
+    private String computerMove3Color;
+    private String computerMove4Color;
+    //END TEST CODE
 
     @FXML
     private AnchorPane anchorpane;
+
+    @FXML
+    private Button storeButton;
 
     @FXML
     private ComboBox<String> passwordColorSelector;
@@ -111,204 +131,184 @@ public class MastermindController implements Initializable {
     private Rectangle computerMovePeg4;
 
     @FXML
-    private HBox oldMoveBox;
+    private ScrollPane oldMoveScrollPane;
 
     @FXML
     private Rectangle oldMoveBackground;
 
     @FXML
-    private Circle oldMove1Slot;
+    private VBox oldMoveList;
 
-    @FXML
-    private Circle oldMove2Slot;
-
-    @FXML
-    private Circle oldMove3Slot;
-
-    @FXML
-    private Circle oldMove4Slot;
-
-    @FXML
-    private Rectangle oldMovePeg1;
-
-    @FXML
-    private Rectangle oldMovePeg2;
-
-    @FXML
-    private Rectangle oldMovePeg3;
-
-    @FXML
-    private Rectangle oldMovePeg4;
-
+    //changes password slot color when clicked to current color (combo box)
     @FXML
     void setSlotColor(MouseEvent event) {
-        if(currentColor!=null) {
+        if (currentColorName != null) {
             if (event.getSource().equals(passwordMove1Image) || event.getSource().equals(passwordMove1Slot)) {
-                System.out.println("Password 1");
-                passwordMove1Image.setEffect(new ImageInput(currentColor, -10, -10));
-                passwordMove1Image.setVisible(true);
+                changeSlotColor(passwordMove1Image,currentColorName);
+                passwordMove1Color = currentColorName;
             } else if (event.getSource().equals(passwordMove2Image) || event.getSource().equals(passwordMove2Slot)) {
-                System.out.println("Password 2");
-                passwordMove2Image.setEffect(new ImageInput(currentColor, -10, -10));
-                passwordMove2Image.setVisible(true);
+                changeSlotColor(passwordMove2Image,currentColorName);
+                passwordMove2Color = currentColorName;
             } else if (event.getSource().equals(passwordMove3Image) || event.getSource().equals(passwordMove3Slot)) {
-                System.out.println("Password 3");
-                passwordMove3Image.setEffect(new ImageInput(currentColor, -10, -10));
-                passwordMove3Image.setVisible(true);
+                changeSlotColor(passwordMove3Image,currentColorName);
+                passwordMove3Color = currentColorName;
             } else if (event.getSource().equals(passwordMove4Image) || event.getSource().equals(passwordMove4Slot)) {
-                System.out.println("Password 4");
-                passwordMove4Image.setEffect(new ImageInput(currentColor, -10, -10));
-                passwordMove4Image.setVisible(true);
+                changeSlotColor(passwordMove4Image,currentColorName);
+                passwordMove4Color = currentColorName;
             }
         }
     }
 
+    //randomizes the password
     @FXML
     void randomPassword(ActionEvent event) {
         Random rand = new Random();
-        randomColor(rand.nextInt(9));
-        passwordMove1Image.setEffect(new ImageInput(currentColor, -10, -10));
-        passwordMove1Image.setVisible(true);
-        randomColor(rand.nextInt(8));
-        passwordMove2Image.setEffect(new ImageInput(currentColor, -10, -10));
-        passwordMove2Image.setVisible(true);
-        randomColor(rand.nextInt(8));
-        passwordMove3Image.setEffect(new ImageInput(currentColor, -10, -10));
-        passwordMove3Image.setVisible(true);
-        randomColor(rand.nextInt(8));
-        passwordMove4Image.setEffect(new ImageInput(currentColor, -10, -10));
-        passwordMove4Image.setVisible(true);
+        passwordMove1Color = randomColor(rand.nextInt(8)+1);
+        changeSlotColor(passwordMove1Image, passwordMove1Color);
+        passwordMove2Color = randomColor(rand.nextInt(8)+1);
+        changeSlotColor(passwordMove2Image, passwordMove2Color);
+        passwordMove3Color = randomColor(rand.nextInt(8)+1);
+        changeSlotColor(passwordMove3Image, passwordMove3Color);
+        passwordMove4Color = randomColor(rand.nextInt(8)+1);
+        changeSlotColor(passwordMove4Image, passwordMove4Color);
+    }
+
+    //sets the image of a password/computer move slot
+    public void changeSlotColor(Circle slot,String color) {
+        slot.setEffect(new ImageInput(colorNameToImage(color), -10, -10));
+        slot.setVisible(true);
+    }
+
+    //returns one of our .png Image when given String color name
+    public Image colorNameToImage(String colorName) {
+        switch(colorName) {
+            case "blue":    return blue;
+            case "brown":   return brown;
+            case "green":   return green;
+            case "orange":  return orange;
+            case "purple":  return purple;
+            case "red":     return red;
+            case "white":   return white;
+            case "yellow":  return yellow;
+        }
+        return null;
+    }
+
+    //returns a Color.X value when given String color name X
+    public Color colorNameToColor(String colorName) {
+        switch(colorName) {
+            case "blue":    return Color.BLUE;
+            case "brown":   return Color.SADDLEBROWN;
+            case "green":   return Color.GREEN;
+            case "orange":  return Color.ORANGE;
+            case "purple":  return Color.PURPLE;
+            case "red":     return Color.RED;
+            case "white":   return Color.WHITE;
+            case "yellow":  return Color.YELLOW;
+        }
+        return null;
+    }
+
+    //returns the name of a random color
+    public String randomColor(int rand) {
+        switch(rand) {
+            case 1: return "blue";
+            case 2: return "brown";
+            case 3: return "green";
+            case 4: return "orange";
+            case 5: return "purple";
+            case 6: return "red";
+            case 7: return "white";
+            case 8: return "yellow";
+        }
+        return null;
+    }
+
+    //TODO
+    //This is going to save the password and have the computer attempt to solve it
+    @FXML
+    void savePassword(ActionEvent event) {
+        //TODO
+
+        //TEST CODE
+        //All code below this is just for testing
+
+        //This sets the computer's guess to the current password
+        computerMove1Color = passwordMove1Color;
+        computerMove2Color = passwordMove2Color;
+        computerMove3Color = passwordMove3Color;
+        computerMove4Color = passwordMove4Color;
+        changeSlotColor(computerMove1Image, computerMove1Color);
+        changeSlotColor(computerMove2Image, computerMove2Color);
+        changeSlotColor(computerMove3Image, computerMove3Color);
+        changeSlotColor(computerMove4Image, computerMove4Color);
 
     }
 
-    public void randomColor(int rand) {
-        switch(rand) {
-            case 1:
-                currentColor = blue;
-                break;
-            case 2:
-                currentColor = brown;
-                break;
-            case 3:
-                currentColor = green;
-                break;
-            case 4:
-                currentColor = orange;
-                break;
-            case 5:
-                currentColor = purple;
-                break;
-            case 6:
-                currentColor = red;
-                break;
-            case 7:
-                currentColor = white;
-                break;
-            case 8:
-                currentColor = yellow;
-                break;
-        }
+    //This method pushes the computer's current guess into the "previous moves" scroll pane
+    @FXML
+    void computerNextMove(ActionEvent event) {
+
+        HBox oldMove = new HBox();
+        oldMove.setPrefSize(485,100);
+
+        Circle oldMove1 = new Circle(30, colorNameToColor(computerMove1Color));
+        oldMove1.setStroke(Color.BLACK);
+        Circle oldMove2 = new Circle(30, colorNameToColor(computerMove2Color));
+        oldMove2.setStroke(Color.BLACK);
+        Circle oldMove3 = new Circle(30, colorNameToColor(computerMove3Color));
+        oldMove3.setStroke(Color.BLACK);
+        Circle oldMove4 = new Circle(30, colorNameToColor(computerMove4Color));
+        oldMove4.setStroke(Color.BLACK);
+
+        Line separator = new Line(100,5,100,95);
+        GridPane pegs = new GridPane();
+
+        Rectangle oldMovePeg1 = new Rectangle(30,30,Color.DODGERBLUE);
+        oldMovePeg1.setStroke(Color.BLACK);
+        Rectangle oldMovePeg2 = new Rectangle(30,30,Color.DODGERBLUE);
+        oldMovePeg2.setStroke(Color.BLACK);
+        Rectangle oldMovePeg3 = new Rectangle(30,30,Color.DODGERBLUE);
+        oldMovePeg3.setStroke(Color.BLACK);
+        Rectangle oldMovePeg4 = new Rectangle(30,30,Color.DODGERBLUE);
+        oldMovePeg4.setStroke(Color.BLACK);
+
+        GridPane.setConstraints(oldMovePeg1, 0, 0, 1, 1, HPos.CENTER, VPos.CENTER, Priority.ALWAYS, Priority.ALWAYS, new Insets(0,0,0,10));
+        GridPane.setConstraints(oldMovePeg2, 1, 0, 1, 1, HPos.CENTER, VPos.CENTER, Priority.ALWAYS, Priority.ALWAYS, new Insets(0,0,0,10));
+        GridPane.setConstraints(oldMovePeg3, 0, 1, 1, 1, HPos.CENTER, VPos.CENTER, Priority.ALWAYS, Priority.ALWAYS, new Insets(0,0,0,10));
+        GridPane.setConstraints(oldMovePeg4, 1, 1, 1, 1, HPos.CENTER, VPos.CENTER, Priority.ALWAYS, Priority.ALWAYS, new Insets(0,0,0,10));
+
+        pegs.getChildren().addAll(oldMovePeg1, oldMovePeg2, oldMovePeg3, oldMovePeg4);
+        oldMove.getChildren().addAll(oldMove1,oldMove2,oldMove3,oldMove4, separator, pegs);
+
+        oldMove.setMargin(oldMove1, new Insets(20,15,10,20));
+        oldMove.setMargin(oldMove2, new Insets(20,15,0,15));
+        oldMove.setMargin(oldMove3, new Insets(20,15,0,15));
+        oldMove.setMargin(oldMove4, new Insets(20,10,0,15));
+        oldMove.setMargin(separator, new Insets(5,10,0,10));
+
+        oldMoveList.getChildren().add(0, oldMove);
+
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-//        passwordColorSelector.getItems().setAll(blue,red);
         passwordColorSelector.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
                 switch (newValue) {
-                    case "Blue": currentColor = blue; break;
-                    case "Brown": currentColor = brown; break;
-                    case "Green": currentColor = green; break;
-                    case "Orange": currentColor = orange; break;
-                    case "Purple": currentColor = purple; break;
-                    case "Red": currentColor = red; break;
-                    case "White": currentColor = white; break;
-                    case "Yellow": currentColor = yellow; break;
+                    case "Blue":    currentColorName = "blue";    break;
+                    case "Brown":   currentColorName = "brown";   break;
+                    case "Green":   currentColorName = "green";   break;
+                    case "Orange":  currentColorName = "orange"; break;
+                    case "Purple":  currentColorName = "purple";  break;
+                    case "Red":     currentColorName = "red";     break;
+                    case "White":   currentColorName = "white";   break;
+                    case "Yellow":  currentColorName = "yellow";  break;
                 }
             }
         });
 
     }
-
-//    @FXML
-//    void 1f1c32(ActionEvent event) {
-//
-//    }
-//
-//    @FXML
-//    void b21212(ActionEvent event) {
-//
-//    }
-//
-//    @FXML
-//    void 00000082(ActionEvent event) {
-//
-//    }
-//
-//    @FXML
-//    void 616161f5(ActionEvent event) {
-//
-//    }
-//
-//    @FXML
-//    void 636363f5(ActionEvent event) {
-//
-//    }
-//
-//    @FXML
-//    void 636363f5(ActionEvent event) {
-//
-//    }
-//
-//    @FXML
-//    void 636363f5(ActionEvent event) {
-//
-//    }
-//
-//    @FXML
-//    void ff7777(ActionEvent event) {
-//
-//    }
-//
-//    @FXML
-//    void ff7777(ActionEvent event) {
-//
-//    }
-//
-//    @FXML
-//    void ff7777(ActionEvent event) {
-//
-//    }
-//
-//    @FXML
-//    void ff7777(ActionEvent event) {
-//
-//    }
-//
-//    @FXML
-//    void 616161f5(ActionEvent event) {
-//
-//    }
-//
-//    @FXML
-//    void 616161f5(ActionEvent event) {
-//
-//    }
-//
-//    @FXML
-//    void 616161f5(ActionEvent event) {
-//
-//    }
-//
-//    @FXML
-//    void 616161f5(ActionEvent event) {
-//
-//    }
-//
-//    @FXML
-//    void 0000009f(ActionEvent event) {
-//
-//    }
 
 }
