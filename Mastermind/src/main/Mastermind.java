@@ -25,7 +25,7 @@ public class Mastermind extends Application {
 	
 	int n = 0;
 	
-	List<Row> rows = new ArrayList<>();
+//	List<Row> rows = new ArrayList<>();
 	
 	List<Integer> S = new ArrayList<>();
 	List<Integer> score = new ArrayList<>();
@@ -37,24 +37,14 @@ public class Mastermind extends Application {
 
 	@Override
 	public void start(Stage stage) throws Exception {
-		root = new Group();
-		gameLayer = new Pane();
-		camera = new ScrollPane(gameLayer);
-	    scene = new Scene(camera);
-		
-		root.getChildren().add(camera);
-		camera.setHmin(0);
-	    camera.setVmin(0);
-	    camera.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-	    //camera.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-	    camera.setPannable(false);
-	    camera.setPrefSize(Settings.SCENE_WIDTH, Settings.SCENE_HEIGHT);
-		
+		Parent root = FXMLLoader.load(getClass().getResource("Mastermind.fxml"));
+	    scene = new Scene(root);
 	    stage.initStyle(StageStyle.DECORATED);
+		stage.setTitle("Mastermind");
 	    stage.setWidth(Settings.SCENE_WIDTH);
 	    stage.setHeight(Settings.SCENE_HEIGHT);
 	    stage.setScene(scene);
-		stage.setResizable(false);
+        stage.setResizable(false);
         stage.show();
         
         createGameLoop();

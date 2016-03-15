@@ -9,7 +9,7 @@ import javafx.scene.paint.Color;
 public class Settings {
 	
 	public static double SCENE_WIDTH = 600;
-	public static double SCENE_HEIGHT = 800;
+	public static double SCENE_HEIGHT = 500;
 	
 	public static Map<Integer, Color> colors() {
 		return Collections.unmodifiableMap(new HashMap<Integer, Color>() {
