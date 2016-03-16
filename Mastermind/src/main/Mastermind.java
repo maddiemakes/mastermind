@@ -27,7 +27,13 @@ public class Mastermind extends Application {
 	
 	List<Integer> S = new ArrayList<>();
 	List<Integer> score = new ArrayList<>();
-	int guess = 1122;
+	
+	int[] code = new int[Settings.NUM_SPACES];
+	int[] guess = {1,1,2,2};
+	int white, red;
+	
+	int r = 0;
+	int w = 0;
 	
 	public static void main(String[] args) {
 		launch(args);
@@ -56,7 +62,7 @@ public class Mastermind extends Application {
         stage.show();
         
         createGameLoop();
-        //gameLoop.start();
+        gameLoop.start();
 	}
 	
 	private void createGameLoop() {
@@ -64,32 +70,61 @@ public class Mastermind extends Application {
 			@Override
 			public void handle(long l) {  
 				chooseCode();
-				if (guess != 0) {
+				/*if (guess != 0) {
 					makeGuess();
 					guess = 0;
-				}
+				}*/
 		 	}
 		};
 	}
 	
-	private void createS() {
-		for (int a=1; a<=8; a++) {
-			for (int b=1; b<=8; b++) {
-				for (int c=1; c<=8; c++) {
-					for (int d=1; d<=8; d++) {
-						S.add(1000*a+100*b+10*c+d);
-					}
-				}
-			}
+	private void createS() { //create set S of all possible guesses
+		int a = 0;
+		for (int i=0; i<Settings.NUM_SPACES; i++) {
+			a += Math.pow(10, i);
+		}
+		for (; a<=Math.pow(Settings.NUM_COLORS, Settings.NUM_SPACES); a++) {
+			S.add(a);
 		}
 	}
 	
 	private void makeGuess() {
-		
+		//output guess to GUI
 	}
 	
 	private void chooseCode() {
-		
+		//allow user to input code
+	}
+	
+	private void cut() {
+		//take in last guess (int guess) and pegs
+		//remove impossible solutions in set S
+		for (int i=0; i<S.size(); i++) {
+			//if # of white pegs that would be given = what was given
+			//and if # of red pegs that would be given = what was given
+			//if ()
+		}
+	}
+	
+	private void getPegs(int[] guess, int[] code) {
+		//returns number of red and white pegs to global variables r and w
+		int white=0, red=0;
+		boolean[] flag = new boolean[Settings.NUM_SPACES];
+		for (int i=0; i<Settings.NUM_SPACES; i++) {
+			if (guess[i] == code[i]) {
+				red++;
+			} else {
+				for (int j=0; j<Settings.NUM_SPACES; j++) {
+					if (j!=i && guess[i] != code[j] && !flag[j]) {
+						white++;
+						flag[j] = true;
+						break;
+					}
+				}
+			}
+		}
+		w=white;
+		r=red;
 	}
 	
 }

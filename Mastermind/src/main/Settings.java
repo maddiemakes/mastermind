@@ -11,6 +11,8 @@ public class Settings {
 	public static double SCENE_WIDTH = 600;
 	public static double SCENE_HEIGHT = 800;
 	
+	public static int NUM_COLORS = 8; //(<10)
+	public static int NUM_SPACES = 4;
 	public static Map<Integer, Color> colors() {
 		return Collections.unmodifiableMap(new HashMap<Integer, Color>() {
 			private static final long serialVersionUID = 1L;
