@@ -47,6 +47,10 @@ public class MastermindController implements Initializable {
     private String computerMove2Color;
     private String computerMove3Color;
     private String computerMove4Color;
+    private String computerPeg1Color;
+    private String computerPeg2Color;
+    private String computerPeg3Color;
+    private String computerPeg4Color;
     //END TEST CODE
 
     @FXML
@@ -234,6 +238,7 @@ public class MastermindController implements Initializable {
         //All code below this is just for testing
 
         //This sets the computer's guess to the current password
+      /*
         computerMove1Color = passwordMove1Color;
         computerMove2Color = passwordMove2Color;
         computerMove3Color = passwordMove3Color;
@@ -242,6 +247,40 @@ public class MastermindController implements Initializable {
         changeSlotColor(computerMove2Image, computerMove2Color);
         changeSlotColor(computerMove3Image, computerMove3Color);
         changeSlotColor(computerMove4Image, computerMove4Color);
+      */
+
+        //Computer makes random moves
+//      /*
+        Random rand = new Random();
+        computerMove1Color = randomColor(rand.nextInt(8)+1);
+        changeSlotColor(computerMove1Image, computerMove1Color);
+        computerMove2Color = randomColor(rand.nextInt(8)+1);
+        changeSlotColor(computerMove2Image, computerMove2Color);
+        computerMove3Color = randomColor(rand.nextInt(8)+1);
+        changeSlotColor(computerMove3Image, computerMove3Color);
+        computerMove4Color = randomColor(rand.nextInt(8)+1);
+        changeSlotColor(computerMove4Image, computerMove4Color);
+//      */
+
+        //runs pegCheck
+        pegCheck();
+
+    }
+
+    public void pegCheck() {
+        //TODO
+        //Checks to see if any colors are the same
+        //If color same and in same spot, add black peg
+        //If color same, wrong spot, add white peg
+
+        //if (guessColorX = passwordColorX) {
+        //  add black peg
+        //}
+        //if (guessColorX = passwordColorY) {
+        //  add white peg
+        //}
+        int blackPegs = 0;
+        int whitePegs = 0;
 
     }
 
