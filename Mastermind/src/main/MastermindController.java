@@ -19,39 +19,43 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
+import javafx.util.Pair;
 
 import java.io.File;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import java.util.ResourceBundle;
 
 public class MastermindController implements Initializable {
 
-    private Image blue = new Image(new File("Mastermind/src/main/pictures/blue.png").toURI().toString());
-    private Image brown = new Image(new File("Mastermind/src/main/pictures/brown.png").toURI().toString());
-    private Image green = new Image(new File("Mastermind/src/main/pictures/green.png").toURI().toString());
-    private Image orange = new Image(new File("Mastermind/src/main/pictures/orange.png").toURI().toString());
-    private Image purple = new Image(new File("Mastermind/src/main/pictures/purple.png").toURI().toString());
-    private Image red = new Image(new File("Mastermind/src/main/pictures/red.png").toURI().toString());
-    private Image white = new Image(new File("Mastermind/src/main/pictures/white.png").toURI().toString());
-    private Image yellow = new Image(new File("Mastermind/src/main/pictures/yellow.png").toURI().toString());
-//    private Image currentColor = null;
+    private Pair<Color, Image> blue = new Pair<>(Color.BLUE,new Image(new File("Mastermind/src/main/pictures/blue.png").toURI().toString()));
+    private Pair<Color, Image> brown = new Pair<>(Color.SADDLEBROWN,new Image(new File("Mastermind/src/main/pictures/brown.png").toURI().toString()));
+    private Pair<Color, Image> green = new Pair<>(Color.GREEN,new Image(new File("Mastermind/src/main/pictures/green.png").toURI().toString()));
+    private Pair<Color, Image> orange = new Pair<>(Color.ORANGE,new Image(new File("Mastermind/src/main/pictures/orange.png").toURI().toString()));
+    private Pair<Color, Image> purple = new Pair<>(Color.PURPLE,new Image(new File("Mastermind/src/main/pictures/purple.png").toURI().toString()));
+    private Pair<Color, Image> red = new Pair<>(Color.RED,new Image(new File("Mastermind/src/main/pictures/red.png").toURI().toString()));
+    private Pair<Color, Image> white = new Pair<>(Color.WHITE,new Image(new File("Mastermind/src/main/pictures/white.png").toURI().toString()));
+    private Pair<Color, Image> yellow = new Pair<>(Color.YELLOW,new Image(new File("Mastermind/src/main/pictures/yellow.png").toURI().toString()));
+    private Pair<Color, Image> empty = new Pair<>(Color.valueOf("#616161f5"), null);
 
     //TEST CODE
-    private String currentColorName = null;
-    private String passwordMove1Color;
-    private String passwordMove2Color;
-    private String passwordMove3Color;
-    private String passwordMove4Color;
-    private String computerMove1Color;
-    private String computerMove2Color;
-    private String computerMove3Color;
-    private String computerMove4Color;
-    private String computerPeg1Color;
-    private String computerPeg2Color;
-    private String computerPeg3Color;
-    private String computerPeg4Color;
+    private Pair<Color, Image> currentColorName = null;
+    private Pair<Color, Image> passwordMove1Color;
+    private Pair<Color, Image> passwordMove2Color;
+    private Pair<Color, Image> passwordMove3Color;
+    private Pair<Color, Image> passwordMove4Color;
+    private Pair<Color, Image> computerMove1Color;
+    private Pair<Color, Image> computerMove2Color;
+    private Pair<Color, Image> computerMove3Color;
+    private Pair<Color, Image> computerMove4Color;
+    private Pair<Color, Image> computerPeg1Color;
+    private Pair<Color, Image> computerPeg2Color;
+    private Pair<Color, Image> computerPeg3Color;
+    private Pair<Color, Image> computerPeg4Color;
     //END TEST CODE
+
 
     @FXML
     private AnchorPane anchorpane;
@@ -143,6 +147,7 @@ public class MastermindController implements Initializable {
     @FXML
     private VBox oldMoveList;
 
+
     //changes password slot color when clicked to current color (combo box)
     @FXML
     void setSlotColor(MouseEvent event) {
@@ -178,52 +183,22 @@ public class MastermindController implements Initializable {
     }
 
     //sets the image of a password/computer move slot
-    public void changeSlotColor(Circle slot,String color) {
-        slot.setEffect(new ImageInput(colorNameToImage(color), -10, -10));
+    public void changeSlotColor(Circle slot, Pair<Color, Image> color) {
+        slot.setEffect(new ImageInput(color.getValue(), -10, -10));
         slot.setVisible(true);
     }
 
-    //returns one of our .png Image when given String color name
-    public Image colorNameToImage(String colorName) {
-        switch(colorName) {
-            case "blue":    return blue;
-            case "brown":   return brown;
-            case "green":   return green;
-            case "orange":  return orange;
-            case "purple":  return purple;
-            case "red":     return red;
-            case "white":   return white;
-            case "yellow":  return yellow;
-        }
-        return null;
-    }
-
-    //returns a Color.X value when given String color name X
-    public Color colorNameToColor(String colorName) {
-        switch(colorName) {
-            case "blue":    return Color.BLUE;
-            case "brown":   return Color.SADDLEBROWN;
-            case "green":   return Color.GREEN;
-            case "orange":  return Color.ORANGE;
-            case "purple":  return Color.PURPLE;
-            case "red":     return Color.RED;
-            case "white":   return Color.WHITE;
-            case "yellow":  return Color.YELLOW;
-        }
-        return null;
-    }
-
     //returns the name of a random color
-    public String randomColor(int rand) {
+    public Pair<Color, Image> randomColor(int rand) {
         switch(rand) {
-            case 1: return "blue";
-            case 2: return "brown";
-            case 3: return "green";
-            case 4: return "orange";
-            case 5: return "purple";
-            case 6: return "red";
-            case 7: return "white";
-            case 8: return "yellow";
+            case 1: return blue;
+            case 2: return brown;
+            case 3: return green;
+            case 4: return orange;
+            case 5: return purple;
+            case 6: return red;
+            case 7: return white;
+            case 8: return yellow;
         }
         return null;
     }
@@ -268,19 +243,54 @@ public class MastermindController implements Initializable {
     }
 
     public void pegCheck() {
-        //TODO
-        //Checks to see if any colors are the same
-        //If color same and in same spot, add black peg
-        //If color same, wrong spot, add white peg
 
-        //if (guessColorX = passwordColorX) {
-        //  add black peg
-        //}
-        //if (guessColorX = passwordColorY) {
-        //  add white peg
-        //}
-        int blackPegs = 0;
-        int whitePegs = 0;
+        List<Pair<Color, Image>> passwordColors = new ArrayList<>(4);
+        passwordColors.add(0, passwordMove1Color);
+        passwordColors.add(1, passwordMove2Color);
+        passwordColors.add(2, passwordMove3Color);
+        passwordColors.add(3, passwordMove4Color);
+
+        List<Pair<Color, Image>> computerColors = new ArrayList<>(4);
+        computerColors.add(0, computerMove1Color);
+        computerColors.add(1, computerMove2Color);
+        computerColors.add(2, computerMove3Color);
+        computerColors.add(3, computerMove4Color);
+        List<Pair<Color, Image>> computerPegColors = new ArrayList<>(4);
+        for(int i=0;i<4;i++) computerPegColors.add(i, empty);
+
+        int whitePegs = 0, redPegs = 0;
+        boolean[] flag = new boolean[Settings.NUM_SPACES];
+        for (int i=0; i < Settings.NUM_SPACES; i++) {
+            flag[i] = false;
+        }
+        for (int i=0; i < Settings.NUM_SPACES; i++) {
+            if (computerColors.get(i) == passwordColors.get(i) && !flag[i]) {
+                redPegs++;
+            } else {
+                for (int j=0; j < Settings.NUM_SPACES; j++) {
+                    if (j!=i && computerColors.get(i) == passwordColors.get(j) && !flag[j]) {
+                        whitePegs++;
+                        flag[j] = true;
+                        break;
+                    }
+                }
+            }
+        }
+        for (int k = 0; k < redPegs; k++) {
+            computerPegColors.set(k, red);
+        }
+        int l;
+        for(l = redPegs; l < whitePegs + redPegs; l++) {
+            computerPegColors.set(l, white);
+        }
+        computerPeg1Color = computerPegColors.get(0);
+        computerPeg2Color = computerPegColors.get(1);
+        computerPeg3Color = computerPegColors.get(2);
+        computerPeg4Color = computerPegColors.get(3);
+        if(computerPeg1Color != null) { computerMovePeg1.setFill(computerPeg1Color.getKey()); }
+        if(computerPeg2Color != null) { computerMovePeg2.setFill(computerPeg2Color.getKey()); }
+        if(computerPeg3Color != null) { computerMovePeg3.setFill(computerPeg3Color.getKey()); }
+        if(computerPeg4Color != null) { computerMovePeg4.setFill(computerPeg4Color.getKey()); }
 
     }
 
@@ -291,25 +301,30 @@ public class MastermindController implements Initializable {
         HBox oldMove = new HBox();
         oldMove.setPrefSize(485,100);
 
-        Circle oldMove1 = new Circle(30, colorNameToColor(computerMove1Color));
+//        Circle oldMove1 = new Circle(30, colorNameToColor(computerMove1Color));
+        Circle oldMove1 = new Circle(30, computerMove1Color.getKey());
         oldMove1.setStroke(Color.BLACK);
-        Circle oldMove2 = new Circle(30, colorNameToColor(computerMove2Color));
+        Circle oldMove2 = new Circle(30, computerMove2Color.getKey());
         oldMove2.setStroke(Color.BLACK);
-        Circle oldMove3 = new Circle(30, colorNameToColor(computerMove3Color));
+        Circle oldMove3 = new Circle(30, computerMove3Color.getKey());
         oldMove3.setStroke(Color.BLACK);
-        Circle oldMove4 = new Circle(30, colorNameToColor(computerMove4Color));
+        Circle oldMove4 = new Circle(30, computerMove4Color.getKey());
         oldMove4.setStroke(Color.BLACK);
 
         Line separator = new Line(100,5,100,95);
         GridPane pegs = new GridPane();
 
-        Rectangle oldMovePeg1 = new Rectangle(30,30,Color.DODGERBLUE);
+        Rectangle oldMovePeg1 = new Rectangle(30,30, Color.rgb(0,0,0,0));
+        if(computerPeg1Color != empty) { oldMovePeg1.setFill(computerPeg1Color.getKey()); }
         oldMovePeg1.setStroke(Color.BLACK);
-        Rectangle oldMovePeg2 = new Rectangle(30,30,Color.DODGERBLUE);
+        Rectangle oldMovePeg2 = new Rectangle(30,30, Color.rgb(0,0,0,0));
+        if(computerPeg2Color != empty) { oldMovePeg2.setFill(computerPeg2Color.getKey()); }
         oldMovePeg2.setStroke(Color.BLACK);
-        Rectangle oldMovePeg3 = new Rectangle(30,30,Color.DODGERBLUE);
+        Rectangle oldMovePeg3 = new Rectangle(30,30, Color.rgb(0,0,0,0));
+        if(computerPeg3Color != empty) { oldMovePeg3.setFill(computerPeg3Color.getKey()); }
         oldMovePeg3.setStroke(Color.BLACK);
-        Rectangle oldMovePeg4 = new Rectangle(30,30,Color.DODGERBLUE);
+        Rectangle oldMovePeg4 = new Rectangle(30,30, Color.rgb(0,0,0,0));
+        if(computerPeg4Color != empty) { oldMovePeg4.setFill(computerPeg4Color.getKey()); }
         oldMovePeg4.setStroke(Color.BLACK);
 
         GridPane.setConstraints(oldMovePeg1, 0, 0, 1, 1, HPos.CENTER, VPos.CENTER, Priority.ALWAYS, Priority.ALWAYS, new Insets(0,0,0,10));
@@ -332,18 +347,19 @@ public class MastermindController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
         passwordColorSelector.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
                 switch (newValue) {
-                    case "Blue":    currentColorName = "blue";    break;
-                    case "Brown":   currentColorName = "brown";   break;
-                    case "Green":   currentColorName = "green";   break;
-                    case "Orange":  currentColorName = "orange"; break;
-                    case "Purple":  currentColorName = "purple";  break;
-                    case "Red":     currentColorName = "red";     break;
-                    case "White":   currentColorName = "white";   break;
-                    case "Yellow":  currentColorName = "yellow";  break;
+                    case "Blue":    currentColorName = blue;    break;
+                    case "Brown":   currentColorName = brown;   break;
+                    case "Green":   currentColorName = green;   break;
+                    case "Orange":  currentColorName = orange;  break;
+                    case "Purple":  currentColorName = purple;  break;
+                    case "Red":     currentColorName = red;     break;
+                    case "White":   currentColorName = white;   break;
+                    case "Yellow":  currentColorName = yellow;  break;
                 }
             }
         });
