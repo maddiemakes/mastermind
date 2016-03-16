@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.collections.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.effect.*?>
@@ -10,7 +11,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane fx:id="anchorpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MastermindController">
+<AnchorPane fx:id="anchorpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.MastermindController">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f1c32" height="500.0" stroke="BLACK" strokeType="INSIDE" width="600.0">
          <effect>
@@ -26,9 +27,10 @@
             <ImageInput />
          </effect>
       </Rectangle>
+      <Button fx:id="storeButton" layoutX="14.0" layoutY="188.0" mnemonicParsing="false" onAction="#computerNextMove" text="Store" />
       <HBox layoutX="40.0" layoutY="14.0" prefHeight="120.0" prefWidth="530.0">
          <children>
-            <Circle fx:id="passwordMove1Slot" fill="#616161f5" layoutX="60.0" layoutY="60.0" radius="40.0" stroke="BLACK" strokeType="INSIDE">
+            <Circle fx:id="passwordMove1Slot" fill="#616161f5" layoutX="60.0" layoutY="60.0" onMouseClicked="#setSlotColor" radius="40.0" stroke="BLACK" strokeType="INSIDE">
                <HBox.margin>
                   <Insets left="20.0" right="10.0" top="5.0" />
                </HBox.margin>
@@ -36,19 +38,12 @@
                   <InnerShadow />
                </effect>
             </Circle>
-            <Circle fx:id="passwordMove1Image" centerX="30.0" centerY="29.0" fill="WHITE" onMouseClicked="#setSlotColor" radius="40.0" stroke="BLACK" strokeType="INSIDE">
-               <effect>
-                  <ImageInput x="-10.0" y="-10.0">
-                     <source>
-                        <Image url="@pictures/blue.png" />
-                     </source>
-                  </ImageInput>
-               </effect>
+            <Circle fx:id="passwordMove1Image" centerX="30.0" centerY="29.0" fill="WHITE" onMouseClicked="#setSlotColor" radius="40.0" stroke="BLACK" strokeType="INSIDE" visible="false">
                <HBox.margin>
                   <Insets left="-89.0" right="10.0" top="5.0" />
                </HBox.margin>
             </Circle>
-            <Circle fx:id="passwordMove2Slot" fill="#636363f5" radius="40.0" stroke="BLACK" strokeType="INSIDE">
+            <Circle fx:id="passwordMove2Slot" fill="#636363f5" onMouseClicked="#setSlotColor" radius="40.0" stroke="BLACK" strokeType="INSIDE">
                <HBox.margin>
                   <Insets left="10.0" right="10.0" top="5.0" />
                </HBox.margin>
@@ -56,19 +51,12 @@
                   <InnerShadow />
                </effect>
             </Circle>
-            <Circle fx:id="passwordMove2Image" centerX="30.0" centerY="29.0" fill="WHITE" layoutX="41.0" layoutY="41.0" radius="40.0" stroke="BLACK" strokeType="INSIDE">
-               <effect>
-                  <ImageInput x="-10.0" y="-10.0">
-                     <source>
-                        <Image url="@pictures/blue.png" />
-                     </source>
-                  </ImageInput>
-               </effect>
+            <Circle fx:id="passwordMove2Image" centerX="30.0" centerY="29.0" fill="WHITE" layoutX="41.0" layoutY="41.0" onMouseClicked="#setSlotColor" radius="40.0" stroke="BLACK" strokeType="INSIDE" visible="false">
                <HBox.margin>
                   <Insets left="-89.0" right="10.0" top="5.0" />
                </HBox.margin>
             </Circle>
-            <Circle fx:id="passwordMove3Slot" fill="#636363f5" layoutX="60.0" layoutY="60.0" radius="40.0" stroke="BLACK" strokeType="INSIDE">
+            <Circle fx:id="passwordMove3Slot" fill="#636363f5" layoutX="60.0" layoutY="60.0" onMouseClicked="#setSlotColor" radius="40.0" stroke="BLACK" strokeType="INSIDE">
                <HBox.margin>
                   <Insets left="10.0" right="10.0" top="5.0" />
                </HBox.margin>
@@ -76,19 +64,12 @@
                   <InnerShadow />
                </effect>
             </Circle>
-            <Circle fx:id="passwordMove3Image" centerX="30.0" centerY="29.0" fill="WHITE" layoutX="142.0" layoutY="41.0" radius="40.0" stroke="BLACK" strokeType="INSIDE">
-               <effect>
-                  <ImageInput x="-10.0" y="-10.0">
-                     <source>
-                        <Image url="@pictures/blue.png" />
-                     </source>
-                  </ImageInput>
-               </effect>
+            <Circle fx:id="passwordMove3Image" centerX="30.0" centerY="29.0" fill="WHITE" layoutX="142.0" layoutY="41.0" onMouseClicked="#setSlotColor" radius="40.0" stroke="BLACK" strokeType="INSIDE" visible="false">
                <HBox.margin>
                   <Insets left="-89.0" right="10.0" top="5.0" />
                </HBox.margin>
             </Circle>
-            <Circle fx:id="passwordMove4Slot" fill="#636363f5" layoutX="330.0" layoutY="50.0" radius="40.0" stroke="BLACK" strokeType="INSIDE">
+            <Circle fx:id="passwordMove4Slot" fill="#636363f5" layoutX="330.0" layoutY="50.0" onMouseClicked="#setSlotColor" radius="40.0" stroke="BLACK" strokeType="INSIDE">
                <HBox.margin>
                   <Insets left="10.0" right="10.0" top="5.0" />
                </HBox.margin>
@@ -96,14 +77,7 @@
                   <InnerShadow />
                </effect>
             </Circle>
-            <Circle fx:id="passwordMove3Image1" centerX="30.0" centerY="29.0" fill="WHITE" layoutX="243.0" layoutY="41.0" radius="40.0" stroke="BLACK" strokeType="INSIDE">
-               <effect>
-                  <ImageInput x="-10.0" y="-10.0">
-                     <source>
-                        <Image url="@pictures/blue.png" />
-                     </source>
-                  </ImageInput>
-               </effect>
+            <Circle fx:id="passwordMove4Image" centerX="30.0" centerY="29.0" fill="WHITE" layoutX="243.0" layoutY="41.0" onMouseClicked="#setSlotColor" radius="40.0" stroke="BLACK" strokeType="INSIDE" visible="false">
                <HBox.margin>
                   <Insets left="-89.0" top="5.0" />
                </HBox.margin>
@@ -111,12 +85,24 @@
             <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                <children>
                   <ComboBox fx:id="passwordColorSelector" promptText="Color" style="-fx-background-color: rgba(255,255,255,.5);" visibleRowCount="8">
+                      <items>
+                          <FXCollections fx:factory="observableArrayList">
+                              <String fx:value="Blue" />
+                              <String fx:value="Brown" />
+                              <String fx:value="Green" />
+                              <String fx:value="Orange" />
+                              <String fx:value="Purple" />
+                              <String fx:value="Red" />
+                              <String fx:value="White" />
+                              <String fx:value="Yellow" />
+                          </FXCollections>
+                      </items>
                      <VBox.margin>
                         <Insets bottom="5.0" />
                      </VBox.margin>
                   </ComboBox>
-                  <Button fx:id="passwordRandomButton" contentDisplay="TEXT_ONLY" mnemonicParsing="false" style="-fx-background-color: rgba(255,255,255,.5);" text="Random" />
-                  <Button fx:id="passwordSaveButton" contentDisplay="TEXT_ONLY" layoutX="40.0" layoutY="68.0" mnemonicParsing="false" style="-fx-background-color: rgba(255,255,255,.5);" text="Save">
+                  <Button fx:id="passwordRandomButton" contentDisplay="TEXT_ONLY" mnemonicParsing="false" onAction="#randomPassword" style="-fx-background-color: rgba(255,255,255,.5);" text="Random" />
+                  <Button fx:id="passwordSaveButton" contentDisplay="TEXT_ONLY" layoutX="40.0" layoutY="68.0" mnemonicParsing="false" onAction="#savePassword" style="-fx-background-color: rgba(255,255,255,.5);" text="Save">
                      <VBox.margin>
                         <Insets bottom="10.0" top="5.0" />
                      </VBox.margin>
@@ -137,6 +123,9 @@
                <effect>
                   <DropShadow offsetX="-1.0" offsetY="1.0" />
                </effect>
+               <HBox.margin>
+                  <Insets left="10.0" right="-89.0" />
+               </HBox.margin>
                <fill>
                   <RadialGradient centerX="0.6444444444444444" centerY="0.3904761904761904" radius="1.0">
                      <stops>
@@ -145,21 +134,21 @@
                      </stops>
                   </RadialGradient>
                </fill>
-               <HBox.margin>
-                  <Insets left="10.0" right="-89.0" />
-               </HBox.margin>
             </Circle>
-            <Circle fx:id="computerMove1Image" centerX="30.0" centerY="29.0" fill="WHITE" radius="40.0" stroke="BLACK" strokeType="INSIDE">
+            <Circle fx:id="computerMove1Image" centerX="30.0" centerY="29.0" radius="40.0" stroke="BLACK" strokeType="INSIDE">
                <HBox.margin>
                   <Insets left="10.0" right="10.0" />
                </HBox.margin>
-               <effect>
-                  <ImageInput x="-10.0" y="-10.0">
-                     <source>
-                        <Image url="@pictures/blue.png" />
-                     </source>
-                  </ImageInput>
-               </effect>
+               <fill>
+                  <RadialGradient centerX="0.6444444444444444" centerY="0.3904761904761904" radius="1.0">
+                     <stops>
+                        <Stop color="#b1b1b1" />
+                        <Stop color="#b1b1b1" offset="0.007662835249042145" />
+                        <Stop color="BLACK" offset="0.9961685823754789" />
+                        <Stop color="BLACK" offset="1.0" />
+                     </stops>
+                  </RadialGradient>
+               </fill>
             </Circle>
             <Circle fx:id="computerMove2Slot" layoutX="331.0" layoutY="60.0" radius="40.0" stroke="BLACK" strokeType="INSIDE">
                <effect>
@@ -177,17 +166,19 @@
                   <Insets right="-79.0" />
                </HBox.margin>
             </Circle>
-            <Circle fx:id="computerMove2Image" centerX="30.0" centerY="29.0" fill="WHITE" radius="40.0" stroke="BLACK" strokeType="INSIDE">
-               <effect>
-                  <ImageInput x="-10.0" y="-10.0">
-                     <source>
-                        <Image url="@pictures/green.png" />
-                     </source>
-                  </ImageInput>
-               </effect>
+            <Circle fx:id="computerMove2Image" centerX="30.0" centerY="29.0" radius="40.0" stroke="BLACK" strokeType="INSIDE">
                <HBox.margin>
                   <Insets right="10.0" />
                </HBox.margin>
+               <fill>
+                  <RadialGradient centerX="0.6444444444444444" centerY="0.3904761904761904" radius="1.0">
+                     <stops>
+                        <Stop color="#b1b1b1" />
+                        <Stop color="BLACK" offset="0.9961685823754789" />
+                        <Stop color="BLACK" offset="1.0" />
+                     </stops>
+                  </RadialGradient>
+               </fill>
             </Circle>
             <Circle fx:id="computerMove3Slot" layoutX="331.0" layoutY="60.0" radius="40.0" stroke="BLACK" strokeType="INSIDE">
                <effect>
@@ -205,17 +196,19 @@
                   <Insets right="-79.0" />
                </HBox.margin>
             </Circle>
-            <Circle fx:id="computerMove3Image" centerX="30.0" centerY="29.0" fill="WHITE" layoutX="132.0" layoutY="31.0" radius="40.0" stroke="BLACK" strokeType="INSIDE">
-               <effect>
-                  <ImageInput x="-10.0" y="-10.0">
-                     <source>
-                        <Image url="@pictures/orange.png" />
-                     </source>
-                  </ImageInput>
-               </effect>
+            <Circle fx:id="computerMove3Image" centerX="30.0" centerY="29.0" layoutX="132.0" layoutY="31.0" radius="40.0" stroke="BLACK" strokeType="INSIDE">
                <HBox.margin>
                   <Insets right="10.0" />
                </HBox.margin>
+               <fill>
+                  <RadialGradient centerX="0.6444444444444444" centerY="0.3904761904761904" radius="1.0">
+                     <stops>
+                        <Stop color="#b1b1b1" />
+                        <Stop color="BLACK" offset="0.9961685823754789" />
+                        <Stop color="BLACK" offset="1.0" />
+                     </stops>
+                  </RadialGradient>
+               </fill>
             </Circle>
             <Circle fx:id="computerMove4Slot" layoutX="250.0" layoutY="60.0" radius="40.0" stroke="BLACK" strokeType="INSIDE">
                <fill>
@@ -233,17 +226,19 @@
                   <Insets right="-79.0" />
                </HBox.margin>
             </Circle>
-            <Circle fx:id="computerMove4Image" centerX="30.0" centerY="29.0" fill="WHITE" layoutX="223.0" layoutY="31.0" radius="40.0" stroke="BLACK" strokeType="INSIDE">
-               <effect>
-                  <ImageInput x="-10.0" y="-10.0">
-                     <source>
-                        <Image url="@pictures/purple.png" />
-                     </source>
-                  </ImageInput>
-               </effect>
+            <Circle fx:id="computerMove4Image" centerX="30.0" centerY="29.0" layoutX="223.0" layoutY="31.0" radius="40.0" stroke="BLACK" strokeType="INSIDE">
                <HBox.margin>
                   <Insets />
                </HBox.margin>
+               <fill>
+                  <RadialGradient centerX="0.6444444444444444" centerY="0.3904761904761904" radius="1.0">
+                     <stops>
+                        <Stop color="#b1b1b1" />
+                        <Stop color="BLACK" offset="0.9961685823754789" />
+                        <Stop color="BLACK" offset="1.0" />
+                     </stops>
+                  </RadialGradient>
+               </fill>
             </Circle>
             <GridPane fx:id="computerMovePegs" alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="100.0" HBox.hgrow="NEVER">
               <columnConstraints>
@@ -297,9 +292,9 @@
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </padding>
       </HBox>
-      <ScrollPane layoutX="55.0" layoutY="263.0" prefHeight="200.0" prefWidth="500.0">
+      <ScrollPane fx:id="oldMoveScrollPane" hbarPolicy="NEVER" layoutX="55.0" layoutY="263.0" maxWidth="-Infinity" minHeight="200.0" minWidth="-Infinity" prefHeight="200.0" prefViewportHeight="200.0" prefWidth="500.0">
         <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="487.0">
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefWidth="487.0">
                <children>
                   <Rectangle fx:id="oldMoveBackground" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="200.0" stroke="BLACK" strokeType="INSIDE" width="200.0">
                      <effect>
@@ -310,54 +305,7 @@
                         </ImageInput>
                      </effect>
                   </Rectangle>
-                  <HBox fx:id="oldMoveBox" fillHeight="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="485.0">
-                     <children>
-                        <Circle fx:id="oldMove1Slot" fill="DODGERBLUE" layoutX="60.0" layoutY="60.0" radius="30.0" stroke="BLACK" strokeType="INSIDE" HBox.hgrow="ALWAYS">
-                           <HBox.margin>
-                              <Insets bottom="10.0" left="20.0" right="15.0" top="20.0" />
-                           </HBox.margin>
-                        </Circle>
-                        <Circle fx:id="oldMove2Slot" fill="DODGERBLUE" radius="30.0" stroke="BLACK" strokeType="INSIDE" HBox.hgrow="ALWAYS">
-                           <HBox.margin>
-                              <Insets left="15.0" right="15.0" top="20.0" />
-                           </HBox.margin>
-                        </Circle>
-                        <Circle fx:id="oldMove3Slot" fill="DODGERBLUE" layoutX="60.0" layoutY="60.0" radius="30.0" stroke="BLACK" strokeType="INSIDE" HBox.hgrow="ALWAYS">
-                           <HBox.margin>
-                              <Insets left="15.0" right="15.0" top="20.0" />
-                           </HBox.margin>
-                        </Circle>
-                        <Circle fx:id="oldMove4Slot" fill="DODGERBLUE" layoutX="330.0" layoutY="50.0" radius="30.0" stroke="BLACK" strokeType="INSIDE" HBox.hgrow="ALWAYS">
-                           <HBox.margin>
-                              <Insets left="15.0" right="15.0" top="20.0" />
-                           </HBox.margin>
-                        </Circle>
-                        <Line endX="100.0" endY="95.0" startX="100.0" startY="5.0">
-                           <HBox.margin>
-                              <Insets left="10.0" right="5.0" top="5.0" />
-                           </HBox.margin>
-                        </Line>
-                        <GridPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="100.0">
-                           <children>
-                              <Rectangle fx:id="oldMovePeg1" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="30.0" stroke="BLACK" strokeType="INSIDE" width="30.0" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS" />
-                              <Rectangle fx:id="oldMovePeg2" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="30.0" layoutX="20.0" layoutY="30.0" stroke="BLACK" strokeType="INSIDE" width="30.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
-                              <Rectangle fx:id="oldMovePeg3" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="30.0" layoutX="70.0" layoutY="30.0" stroke="BLACK" strokeType="INSIDE" width="30.0" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-                              <Rectangle fx:id="oldMovePeg4" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="30.0" layoutX="10.0" layoutY="70.0" stroke="BLACK" strokeType="INSIDE" width="30.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-                           </children>
-                           <columnConstraints>
-                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                           </columnConstraints>
-                           <rowConstraints>
-                              <RowConstraints maxHeight="50.0" minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="50.0" minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
-                           </rowConstraints>
-                           <padding>
-                              <Insets left="10.0" />
-                           </padding>
-                        </GridPane>
-                     </children>
-                  </HBox>
+                  <VBox fx:id="oldMoveList" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="485.0" />
                </children>
             </AnchorPane>
         </content>
