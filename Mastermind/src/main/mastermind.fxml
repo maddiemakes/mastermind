@@ -10,13 +10,13 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="anchorpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MastermindController">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f1c32" height="500.0" stroke="BLACK" strokeType="INSIDE" width="600.0">
          <effect>
             <ImageInput>
                <source>
-                  <Image url="file:/C:/Users/Jordan/Documents/GitHub/mastermind/pictures/wood.jpg" />
+                  <Image url="@pictures/wood.jpg" />
                </source>
             </ImageInput>
          </effect>
@@ -36,11 +36,11 @@
                   <InnerShadow />
                </effect>
             </Circle>
-            <Circle fx:id="passwordMove1Image" centerX="30.0" centerY="29.0" fill="WHITE" radius="40.0" stroke="BLACK" strokeType="INSIDE" visible="false">
+            <Circle fx:id="passwordMove1Image" centerX="30.0" centerY="29.0" fill="WHITE" onMouseClicked="#setSlotColor" radius="40.0" stroke="BLACK" strokeType="INSIDE">
                <effect>
                   <ImageInput x="-10.0" y="-10.0">
                      <source>
-                        <Image url="file:/C:/Users/Jordan/Documents/GitHub/mastermind/pictures/blue.png" />
+                        <Image url="@pictures/blue.png" />
                      </source>
                   </ImageInput>
                </effect>
@@ -56,11 +56,11 @@
                   <InnerShadow />
                </effect>
             </Circle>
-            <Circle fx:id="passwordMove2Image" centerX="30.0" centerY="29.0" fill="WHITE" layoutX="41.0" layoutY="41.0" radius="40.0" stroke="BLACK" strokeType="INSIDE" visible="false">
+            <Circle fx:id="passwordMove2Image" centerX="30.0" centerY="29.0" fill="WHITE" layoutX="41.0" layoutY="41.0" radius="40.0" stroke="BLACK" strokeType="INSIDE">
                <effect>
                   <ImageInput x="-10.0" y="-10.0">
                      <source>
-                        <Image url="file:/C:/Users/Jordan/Documents/GitHub/mastermind/pictures/blue.png" />
+                        <Image url="@pictures/blue.png" />
                      </source>
                   </ImageInput>
                </effect>
@@ -76,11 +76,11 @@
                   <InnerShadow />
                </effect>
             </Circle>
-            <Circle fx:id="passwordMove3Image" centerX="30.0" centerY="29.0" fill="WHITE" layoutX="142.0" layoutY="41.0" radius="40.0" stroke="BLACK" strokeType="INSIDE" visible="false">
+            <Circle fx:id="passwordMove3Image" centerX="30.0" centerY="29.0" fill="WHITE" layoutX="142.0" layoutY="41.0" radius="40.0" stroke="BLACK" strokeType="INSIDE">
                <effect>
                   <ImageInput x="-10.0" y="-10.0">
                      <source>
-                        <Image url="file:/C:/Users/Jordan/Documents/GitHub/mastermind/pictures/blue.png" />
+                        <Image url="@pictures/blue.png" />
                      </source>
                   </ImageInput>
                </effect>
@@ -96,11 +96,11 @@
                   <InnerShadow />
                </effect>
             </Circle>
-            <Circle fx:id="passwordMove3Image1" centerX="30.0" centerY="29.0" fill="WHITE" layoutX="243.0" layoutY="41.0" radius="40.0" stroke="BLACK" strokeType="INSIDE" visible="false">
+            <Circle fx:id="passwordMove3Image1" centerX="30.0" centerY="29.0" fill="WHITE" layoutX="243.0" layoutY="41.0" radius="40.0" stroke="BLACK" strokeType="INSIDE">
                <effect>
                   <ImageInput x="-10.0" y="-10.0">
                      <source>
-                        <Image url="file:/C:/Users/Jordan/Documents/GitHub/mastermind/pictures/blue.png" />
+                        <Image url="@pictures/blue.png" />
                      </source>
                   </ImageInput>
                </effect>
@@ -110,12 +110,17 @@
             </Circle>
             <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                <children>
-                  <ComboBox promptText="Color" style="-fx-background-color: rgba(255,255,255,.5);" visibleRowCount="8">
+                  <ComboBox fx:id="passwordColorSelector" promptText="Color" style="-fx-background-color: rgba(255,255,255,.5);" visibleRowCount="8">
                      <VBox.margin>
-                        <Insets bottom="10.0" />
+                        <Insets bottom="5.0" />
                      </VBox.margin>
                   </ComboBox>
-                  <Button contentDisplay="TEXT_ONLY" mnemonicParsing="false" style="-fx-background-color: rgba(255,255,255,.5);" text="Save" />
+                  <Button fx:id="passwordRandomButton" contentDisplay="TEXT_ONLY" mnemonicParsing="false" style="-fx-background-color: rgba(255,255,255,.5);" text="Random" />
+                  <Button fx:id="passwordSaveButton" contentDisplay="TEXT_ONLY" layoutX="40.0" layoutY="68.0" mnemonicParsing="false" style="-fx-background-color: rgba(255,255,255,.5);" text="Save">
+                     <VBox.margin>
+                        <Insets bottom="10.0" top="5.0" />
+                     </VBox.margin>
+                  </Button>
                </children>
                <HBox.margin>
                   <Insets left="25.0" />
@@ -151,7 +156,7 @@
                <effect>
                   <ImageInput x="-10.0" y="-10.0">
                      <source>
-                        <Image url="file:/C:/Users/Jordan/Documents/GitHub/mastermind/pictures/blue.png" />
+                        <Image url="@pictures/blue.png" />
                      </source>
                   </ImageInput>
                </effect>
@@ -176,7 +181,7 @@
                <effect>
                   <ImageInput x="-10.0" y="-10.0">
                      <source>
-                        <Image url="file:/C:/Users/Jordan/Documents/GitHub/mastermind/pictures/green.png" />
+                        <Image url="@pictures/green.png" />
                      </source>
                   </ImageInput>
                </effect>
@@ -204,7 +209,7 @@
                <effect>
                   <ImageInput x="-10.0" y="-10.0">
                      <source>
-                        <Image url="file:/C:/Users/Jordan/Documents/GitHub/mastermind/pictures/orange.png" />
+                        <Image url="@pictures/orange.png" />
                      </source>
                   </ImageInput>
                </effect>
@@ -232,7 +237,7 @@
                <effect>
                   <ImageInput x="-10.0" y="-10.0">
                      <source>
-                        <Image url="file:/C:/Users/Jordan/Documents/GitHub/mastermind/pictures/purple.png" />
+                        <Image url="@pictures/purple.png" />
                      </source>
                   </ImageInput>
                </effect>
@@ -300,7 +305,7 @@
                      <effect>
                         <ImageInput>
                            <source>
-                              <Image url="file:/C:/Users/Jordan/Documents/GitHub/mastermind/pictures/metal.png" />
+                              <Image url="@pictures/metal.png" />
                            </source>
                         </ImageInput>
                      </effect>
