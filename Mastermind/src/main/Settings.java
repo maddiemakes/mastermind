@@ -4,30 +4,27 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-import javafx.scene.paint.Color;
-
 public class Settings {
 	
 	public static double SCENE_WIDTH = 600;
 	public static double SCENE_HEIGHT = 528;
 	
-	public static int NUM_COLORS = 8; //(<10)
+	public static int NUM_COLORS = 6; //(<10)
 	public static int NUM_SPACES = 4;
-	public static Map<Integer, Color> colors() {
-		return Collections.unmodifiableMap(new HashMap<Integer, Color>() {
+	public static Map<Integer, String> colors() {
+		return Collections.unmodifiableMap(new HashMap<Integer, String>() {
 			private static final long serialVersionUID = 1L;
 			{
-                put(0, Color.BLACK);
-                put(1, Color.GREEN);
-                put(2, Color.WHITE);
-                put(3, Color.RED);
-                put(4, Color.BLUE);
-                put(5, Color.YELLOW);
-                put(6, Color.BROWN);
-                put(7, Color.PURPLE);
-                put(8, Color.ORANGE);
+                put(0, "black");
+                put(1, "green");
+                put(2, "white");
+                put(3, "red");
+                put(4, "blue");
+                put(5, "yellow");
+                put(6, "brown");
+                put(7, "purple");
+                put(8, "orange");
             }
         });
 	}
-	
 }
