@@ -115,7 +115,7 @@ public class Mastermind extends Application {
 		
 		while (!(red == Settings.NUM_SPACES)) {
 			cut();
-			
+
 			score();
 			//System.out.println("scored");
 			MastermindController.guess = pick();
@@ -124,11 +124,11 @@ public class Mastermind extends Application {
 
 			getPegs(MastermindController.guess, MastermindController.password);
             red = r; white = w;
-			
+
 			System.out.println(Sp.size());
 			System.out.println(Arrays.toString(MastermindController.guess));
 			printPegs();
-			
+
 			for (int i=0; i<Settings.NUM_SPACES; i++) {
 				if (!(MastermindController.guess[i] == 0))
 					break;
