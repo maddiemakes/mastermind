@@ -32,9 +32,11 @@ public class Mastermind extends Application {
 	static List<int[]> S = new ArrayList<>();
 	static List<int[]> Sp = new ArrayList<>();
 	static int[] score;
+
+    static MastermindController controller;
 	
-	static int[] code = new int[Settings.NUM_SPACES];
-	static int[] guess = {1,1,2,2}; //initial guess
+//	static int[] code = new int[Settings.NUM_SPACES];
+//	static int[] guess = {1,1,2,2}; //initial guess
 	static int white;
 	static int red;
 	
@@ -42,6 +44,9 @@ public class Mastermind extends Application {
 	static int w = 0;
 	
 	public static void main(String[] args) {
+		launch(args);
+
+		/*
 		Scanner in = new Scanner(System.in);
 		for (int i=0; i<Settings.NUM_SPACES; i++) {
 			int x = in.nextInt();
@@ -51,13 +56,21 @@ public class Mastermind extends Application {
 				i--;
 		}
 		in.close();
-		AI();
-		//launch(args);
+		*/
+//		AI();
+//		launch(args);
 	}
 
 	@Override
 	public void start(Stage stage) throws Exception {
-		Parent root = FXMLLoader.load(getClass().getResource("Mastermind.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Mastermind.fxml"));
+        Parent root = loader.load();
+//        MastermindController controller = loader.getController();
+        controller = loader.getController();
+
+//		Parent root = FXMLLoader.load(getClass().getResource("Mastermind.fxml"));
+//        MastermindController controller = root.getController();
+
 	    scene = new Scene(root);
 	    stage.initStyle(StageStyle.DECORATED);
 		stage.setTitle("Mastermind");
@@ -67,8 +80,8 @@ public class Mastermind extends Application {
         stage.setResizable(false);
         stage.show();
         
-        createGameLoop();
-        gameLoop.start();
+//        createGameLoop();
+//        gameLoop.start();
 	}
 	
 	private void createGameLoop() {
@@ -84,14 +97,16 @@ public class Mastermind extends Application {
 		};
 	}
 	
-	private static void AI() {
+	public static void AI() {
 		createS();
-		
+
 		//System.out.println(S.size());
 		
-		getPegs(guess, code);
+		getPegs(MastermindController.guess, MastermindController.password);
 
-		System.out.println(Arrays.toString(guess));
+//        MastermindController.pegCheck();
+
+		System.out.println(Arrays.toString(MastermindController.guess));
 		red = r; white = w;
 		printPegs();
 		
@@ -103,17 +118,19 @@ public class Mastermind extends Application {
 			
 			score();
 			//System.out.println("scored");
-			guess = pick();
+			MastermindController.guess = pick();
+            controller.setGuess();
+//            MastermindController.setGuess();
 
-			getPegs(guess, code);
-			red = r; white = w;
+			getPegs(MastermindController.guess, MastermindController.password);
+            red = r; white = w;
 			
 			System.out.println(Sp.size());
-			System.out.println(Arrays.toString(guess));
+			System.out.println(Arrays.toString(MastermindController.guess));
 			printPegs();
 			
 			for (int i=0; i<Settings.NUM_SPACES; i++) {
-				if (!(guess[i] == 0))
+				if (!(MastermindController.guess[i] == 0))
 					break;
 				else if (i == Settings.NUM_SPACES-1)
 					System.exit(0);
@@ -157,7 +174,7 @@ public class Mastermind extends Application {
 		}
 		for (int i=0; i<b.length; i++) {
 			int c[] = new int[Settings.NUM_SPACES];
-			for (int j=0; j<Settings.NUM_SPACES; j++) {
+			for (int j=0; j < Settings.NUM_SPACES; j++) {
 				c[j] = (b[i]/((int)Math.pow(10, j)))%10;
 			}
 			S.add(i, c);
@@ -176,7 +193,7 @@ public class Mastermind extends Application {
 			//and if # of red pegs that would be given = what was given
 			//then it is a possible solution
 			
-			getPegs(guess, Sp.get(i));
+			getPegs(MastermindController.guess, Sp.get(i));
 			if (r != red || w != white) {
 				//System.out.println("r: " + r + " w: " + w);
 				//System.out.println("rem: " + Arrays.toString(Sp.get(i)));
@@ -224,15 +241,15 @@ public class Mastermind extends Application {
 	private static int[] pick() {
 		// pick solution in S with highest score (greatest minimum possible solutions that it could remove from S)
 		int s=0;
-		int[] guess = new int[Settings.NUM_SPACES];
+		int[] newGuess = new int[Settings.NUM_SPACES];
 		for (int i=0; i<score.length; i++) {
 			if (score[i] > s && Sp.contains(S.get(i))) {
-				guess = S.get(i);
+				newGuess = S.get(i);
 				s = score[i];
 				//System.out.println("score: " + score[i] + " guess: " + Arrays.toString(guess));
 			}
 		}
-		return guess;
+		return newGuess;
 	}
 	
 	private static int min(int[] guess) {
@@ -259,7 +276,7 @@ public class Mastermind extends Application {
 				red++;
 				flag[i] = true;
 			} else {
-				for (int j=0; j<Settings.NUM_SPACES; j++) { //through code
+				for (int j=0; j < Settings.NUM_SPACES; j++) { //through code
 					if (j!=i && guess[i] == code[j] && !flag[j] && code[j] != guess[j]) {
 						white++;
 						flag[j] = true;
@@ -268,8 +285,10 @@ public class Mastermind extends Application {
 				}
 			}
 		}
+        controller.paintPegs(red, white);
 		w=white;
 		r=red;
+
 	}
 	
 }

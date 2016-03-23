@@ -21,7 +21,7 @@ public class Row extends HBox {
 		for(int i=0; i<4; i++) {
 			colors[i] = 0;
 			circles[i] = new Circle();
-			circles[i].setFill(Settings.colors().get(colors[i]));
+//			circles[i].setFill(Settings.colors().get(colors[i]));
 			this.getChildren().add(circles[i]);
 		}
 	}

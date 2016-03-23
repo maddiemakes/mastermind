@@ -9,7 +9,7 @@ public class Settings {
 	public static double SCENE_WIDTH = 600;
 	public static double SCENE_HEIGHT = 528;
 	
-	public static int NUM_COLORS = 6; //(<10)
+	public static int NUM_COLORS = 8; //(<10)
 	public static int NUM_SPACES = 4;
 	public static Map<Integer, String> colors() {
 		return Collections.unmodifiableMap(new HashMap<Integer, String>() {
