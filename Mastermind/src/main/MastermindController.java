@@ -56,22 +56,6 @@ public class MastermindController implements Initializable {
     public static int[] password = new int[Settings.NUM_SPACES];
     public static int[] guess = {1,1,2,2};
     public static int[] computerPegs = {0,0,0,0};
-    /*
-    public Pair<Color, Image> currentColorName = null;
-    public Pair<Color, Image> passwordMove1Color;
-    public Pair<Color, Image> passwordMove2Color;
-    public Pair<Color, Image> passwordMove3Color;
-    public Pair<Color, Image> passwordMove4Color;
-    public Pair<Color, Image> computerMove1Color;
-    public Pair<Color, Image> computerMove2Color;
-    public Pair<Color, Image> computerMove3Color;
-    public Pair<Color, Image> computerMove4Color;
-    public Pair<Color, Image> computerPeg1Color;
-    public Pair<Color, Image> computerPeg2Color;
-    public Pair<Color, Image> computerPeg3Color;
-    public Pair<Color, Image> computerPeg4Color;
-    */
-
 
     @FXML
     private AnchorPane anchorpane;
@@ -167,23 +151,18 @@ public class MastermindController implements Initializable {
     //changes password slot color when clicked to current color (combo box)
     @FXML
     void setSlotColor(MouseEvent event) {
-//        if (currentColorName != null) {
         if (currentColorName != 0) {
             if (event.getSource().equals(passwordMove1Image) || event.getSource().equals(passwordMove1Slot)) {
                 changeSlotColor(passwordMove1Image,currentColorName);
-//                passwordMove1Color = currentColorName;
                 password[0] = currentColorName;
             } else if (event.getSource().equals(passwordMove2Image) || event.getSource().equals(passwordMove2Slot)) {
                 changeSlotColor(passwordMove2Image,currentColorName);
-//                passwordMove2Color = currentColorName;
                 password[1] = currentColorName;
             } else if (event.getSource().equals(passwordMove3Image) || event.getSource().equals(passwordMove3Slot)) {
                 changeSlotColor(passwordMove3Image,currentColorName);
-//                passwordMove3Color = currentColorName;
                 password[2] = currentColorName;
             } else if (event.getSource().equals(passwordMove4Image) || event.getSource().equals(passwordMove4Slot)) {
                 changeSlotColor(passwordMove4Image,currentColorName);
-//                passwordMove4Color = currentColorName;
                 password[3] = currentColorName;
             }
         }
@@ -193,16 +172,6 @@ public class MastermindController implements Initializable {
     @FXML
     void randomPassword(ActionEvent event) {
         Random rand = new Random();
-        /*
-        passwordMove1Color = randomColor(rand.nextInt(8)+1);
-        changeSlotColor(passwordMove1Image, passwordMove1Color);
-        passwordMove2Color = randomColor(rand.nextInt(8)+1);
-        changeSlotColor(passwordMove2Image, passwordMove2Color);
-        passwordMove3Color = randomColor(rand.nextInt(8)+1);
-        changeSlotColor(passwordMove3Image, passwordMove3Color);
-        passwordMove4Color = randomColor(rand.nextInt(8)+1);
-        changeSlotColor(passwordMove4Image, passwordMove4Color);
-        */
         for (int i = 0; i < password.length; i++) {
             password[i] = rand.nextInt(8) + 1;
         }
@@ -229,74 +198,17 @@ public class MastermindController implements Initializable {
         slot.setVisible(true);
     }
 
-    //returns the name of a random color
-    public Pair<Color, Image> randomColor(int rand) {
-        /*
-        switch(rand) {
-            case 1: return colorPairs.get(1);
-            case 2: return brown;
-            case 3: return green;
-            case 4: return orange;
-            case 5: return purple;
-            case 6: return red;
-            case 7: return white;
-            case 8: return yellow;
-        }
-        return null;
-        */
-        return colorPairs.get(rand);
-    }
-
-    //TODO
     //This is going to save the password and have the computer attempt to solve it
     @FXML
     void savePassword(ActionEvent event) {
         //TODO
-
-        //TEST CODE
-        //All code below this is just for testing
-
-        //This sets the computer's guess to the current password
-      /*
-        computerMove1Color = passwordMove1Color;
-        computerMove2Color = passwordMove2Color;
-        computerMove3Color = passwordMove3Color;
-        computerMove4Color = passwordMove4Color;
-        changeSlotColor(computerMove1Image, computerMove1Color);
-        changeSlotColor(computerMove2Image, computerMove2Color);
-        changeSlotColor(computerMove3Image, computerMove3Color);
-        changeSlotColor(computerMove4Image, computerMove4Color);
-      */
-
-        //Computer makes random moves
-      /*
-        Random rand = new Random();
-        computerMove1Color = randomColor(rand.nextInt(8)+1);
-        changeSlotColor(computerMove1Image, computerMove1Color);
-        computerMove2Color = randomColor(rand.nextInt(8)+1);
-        changeSlotColor(computerMove2Image, computerMove2Color);
-        computerMove3Color = randomColor(rand.nextInt(8)+1);
-        changeSlotColor(computerMove3Image, computerMove3Color);
-        computerMove4Color = randomColor(rand.nextInt(8)+1);
-        changeSlotColor(computerMove4Image, computerMove4Color);
-      */
-        /*
-        computerMove1Color = colorPairs.get(1);
-        computerMove2Color = colorPairs.get(1);
-        computerMove3Color = colorPairs.get(2);
-        computerMove4Color = colorPairs.get(2);
-        changeSlotColor(computerMove1Image, computerMove1Color);
-        changeSlotColor(computerMove2Image, computerMove2Color);
-        changeSlotColor(computerMove3Image, computerMove3Color);
-        changeSlotColor(computerMove4Image, computerMove4Color);
-        */
         setGuess();
-
-        Mastermind.AI();
-
-        //runs pegCheck
-//        pegCheck();
-
+        boolean hasRun = false;
+        Mastermind.redPegs = 0;
+        while (!(Mastermind.redPegs == Settings.NUM_SPACES)) {
+            Mastermind.AI(hasRun);
+            hasRun = true;
+        }
     }
 
     public void paintPegs(int redPegs, int whitePegs) {
@@ -314,78 +226,20 @@ public class MastermindController implements Initializable {
         computerMovePeg2.setFill(colorPairs.get(computerPegs[1]).getKey());
         computerMovePeg3.setFill(colorPairs.get(computerPegs[2]).getKey());
         computerMovePeg4.setFill(colorPairs.get(computerPegs[3]).getKey());
-//        for (int i = 0; i < computerPegs.length; i++) {
-//            if (computerPegs[i] != 0) {
-//                computerMovePeg1.setFill(colorPairs.get(computerPegs[i]).getKey());
-//            }
-//        }
-    }
-
-    public void pegCheck() {
-
-        int whitePegs = 0, redPegs = 0;
-        boolean[] flag = new boolean[Settings.NUM_SPACES];
-        for (int i=0; i < Settings.NUM_SPACES; i++) {
-            flag[i] = false;
-        }
-        for (int i=0; i < Settings.NUM_SPACES; i++) {
-//            if (computerColors.get(i) == passwordColors.get(i) && !flag[i]) {
-            if (guess[i] == password[i] && !flag[i]) {
-                redPegs++;
-            } else {
-                for (int j=0; j < Settings.NUM_SPACES; j++) {
-//                    if (j!=i && computerColors.get(i) == passwordColors.get(j) && !flag[j]) {
-                    if (j!=i && guess[i] == password[j] && !flag[j]) {
-                        whitePegs++;
-                        flag[j] = true;
-                        break;
-                    }
-                }
-            }
-        }
-        for (int k = 0; k < redPegs; k++) {
-//            computerPegColors.set(k, colorPairs.get(6));
-            computerPegs[k] = 6;
-        }
-        int l;
-        for(l = redPegs; l < whitePegs + redPegs; l++) {
-//            computerPegColors.set(l, colorPairs.get(7));
-            computerPegs[l] = 7;
-        }
-//        computerPeg1Color = computerPegColors.get(0);
-//        computerPeg2Color = computerPegColors.get(1);
-//        computerPeg3Color = computerPegColors.get(2);
-//        computerPeg4Color = computerPegColors.get(3);
-        for (int i = 0; i < computerPegs.length; i++) {
-            if (computerPegs[i] != 0) {
-                computerMovePeg1.setFill(colorPairs.get(computerPegs[i]).getKey());
-            }
-        }
-//        if(computerPeg1Color != 0) { computerMovePeg1.setFill(computerPeg1Color.getKey()); }
-//        if(computerPeg2Color != 0) { computerMovePeg2.setFill(computerPeg2Color.getKey()); }
-//        if(computerPeg3Color != 0) { computerMovePeg3.setFill(computerPeg3Color.getKey()); }
-//        if(computerPeg4Color != 0) { computerMovePeg4.setFill(computerPeg4Color.getKey()); }
-
     }
 
     //This method pushes the computer's current guess into the "previous moves" scroll pane
-//    @FXML
     public void computerNextMove() {
 
         HBox oldMove = new HBox();
         oldMove.setPrefSize(485,100);
 
-//        Circle oldMove1 = new Circle(30, colorNameToColor(computerMove1Color));
-//        Circle oldMove1 = new Circle(30, computerMove1Color.getKey());
         Circle oldMove1 = new Circle(30, colorPairs.get(guess[0]).getKey());
         oldMove1.setStroke(Color.BLACK);
-//        Circle oldMove2 = new Circle(30, computerMove2Color.getKey());
         Circle oldMove2 = new Circle(30, colorPairs.get(guess[1]).getKey());
         oldMove2.setStroke(Color.BLACK);
-//        Circle oldMove3 = new Circle(30, computerMove3Color.getKey());
         Circle oldMove3 = new Circle(30, colorPairs.get(guess[2]).getKey());
         oldMove3.setStroke(Color.BLACK);
-//        Circle oldMove4 = new Circle(30, computerMove4Color.getKey());
         Circle oldMove4 = new Circle(30, colorPairs.get(guess[3]).getKey());
         oldMove4.setStroke(Color.BLACK);
 
@@ -393,19 +247,15 @@ public class MastermindController implements Initializable {
         GridPane pegs = new GridPane();
 
         Rectangle oldMovePeg1 = new Rectangle(30,30, Color.rgb(0,0,0,0));
-//        if(computerPeg1Color != empty) { oldMovePeg1.setFill(computerPeg1Color.getKey()); }
         if(computerPegs[0] != 0) { oldMovePeg1.setFill(colorPairs.get(computerPegs[0]).getKey()); }
         oldMovePeg1.setStroke(Color.BLACK);
         Rectangle oldMovePeg2 = new Rectangle(30,30, Color.rgb(0,0,0,0));
-//        if(computerPeg2Color != empty) { oldMovePeg2.setFill(computerPeg2Color.getKey()); }
         if(computerPegs[1] != 0) { oldMovePeg2.setFill(colorPairs.get(computerPegs[1]).getKey()); }
         oldMovePeg2.setStroke(Color.BLACK);
         Rectangle oldMovePeg3 = new Rectangle(30,30, Color.rgb(0,0,0,0));
-//        if(computerPeg3Color != empty) { oldMovePeg3.setFill(computerPeg3Color.getKey()); }
         if(computerPegs[2] != 0) { oldMovePeg3.setFill(colorPairs.get(computerPegs[2]).getKey()); }
         oldMovePeg3.setStroke(Color.BLACK);
         Rectangle oldMovePeg4 = new Rectangle(30,30, Color.rgb(0,0,0,0));
-//        if(computerPeg4Color != empty) { oldMovePeg4.setFill(computerPeg4Color.getKey()); }
         if(computerPegs[3] != 0) { oldMovePeg4.setFill(colorPairs.get(computerPegs[3]).getKey()); }
         oldMovePeg4.setStroke(Color.BLACK);
 
@@ -445,7 +295,5 @@ public class MastermindController implements Initializable {
                 }
             }
         });
-
     }
-
 }
