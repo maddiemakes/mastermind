@@ -27,7 +27,6 @@
             <ImageInput />
          </effect>
       </Rectangle>
-      <Button fx:id="storeButton" layoutX="14.0" layoutY="188.0" mnemonicParsing="false" onAction="#computerNextMove" text="Store" />
       <HBox layoutX="40.0" layoutY="14.0" prefHeight="120.0" prefWidth="530.0">
          <children>
             <Circle fx:id="passwordMove1Slot" fill="#616161f5" layoutX="60.0" layoutY="60.0" onMouseClicked="#setSlotColor" radius="40.0" stroke="BLACK" strokeType="INSIDE">

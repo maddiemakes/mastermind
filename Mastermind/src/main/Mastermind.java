@@ -101,19 +101,21 @@ public class Mastermind extends Application {
 		createS();
 
 		//System.out.println(S.size());
-		
+
 		getPegs(MastermindController.guess, MastermindController.password);
 
 //        MastermindController.pegCheck();
 
-		System.out.println(Arrays.toString(MastermindController.guess));
+//		System.out.println(Arrays.toString(MastermindController.guess));
 		red = r; white = w;
-		printPegs();
-		
+//		printPegs();
+//        controller.computerNextMove();
+
 		//cut(); //1,1,2,2
 		int[] test = {0, 0, 0, 0};
 		
 		while (!(red == Settings.NUM_SPACES)) {
+            controller.computerNextMove();
 			cut();
 
 			score();
@@ -125,9 +127,9 @@ public class Mastermind extends Application {
 			getPegs(MastermindController.guess, MastermindController.password);
             red = r; white = w;
 
-			System.out.println(Sp.size());
-			System.out.println(Arrays.toString(MastermindController.guess));
-			printPegs();
+//			System.out.println(Sp.size());
+//			System.out.println(Arrays.toString(MastermindController.guess));
+//			printPegs();
 
 			for (int i=0; i<Settings.NUM_SPACES; i++) {
 				if (!(MastermindController.guess[i] == 0))
@@ -144,9 +146,9 @@ public class Mastermind extends Application {
 		}
 	}*/
 	
-	private static void printPegs() {
-		System.out.println("red: " + red + " white: " + white);
-	}
+//	private static void printPegs() {
+//		System.out.println("red: " + red + " white: " + white);
+//	}
 	
 	private static void createS() { //create set S and S' of all possible guesses
 		/*int a = 0;

@@ -295,7 +295,7 @@ public class MastermindController implements Initializable {
         Mastermind.AI();
 
         //runs pegCheck
-        pegCheck();
+//        pegCheck();
 
     }
 
@@ -306,6 +306,9 @@ public class MastermindController implements Initializable {
         int l;
         for(l = redPegs; l < whitePegs + redPegs; l++) {
             computerPegs[l] = 7;
+        }
+        for (;l < 4; l++) {
+            computerPegs[l] = 0;
         }
         computerMovePeg1.setFill(colorPairs.get(computerPegs[0]).getKey());
         computerMovePeg2.setFill(colorPairs.get(computerPegs[1]).getKey());
@@ -366,8 +369,8 @@ public class MastermindController implements Initializable {
     }
 
     //This method pushes the computer's current guess into the "previous moves" scroll pane
-    @FXML
-    void computerNextMove(ActionEvent event) {
+//    @FXML
+    public void computerNextMove() {
 
         HBox oldMove = new HBox();
         oldMove.setPrefSize(485,100);
@@ -395,15 +398,15 @@ public class MastermindController implements Initializable {
         oldMovePeg1.setStroke(Color.BLACK);
         Rectangle oldMovePeg2 = new Rectangle(30,30, Color.rgb(0,0,0,0));
 //        if(computerPeg2Color != empty) { oldMovePeg2.setFill(computerPeg2Color.getKey()); }
-        if(computerPegs[1] != 0) { oldMovePeg1.setFill(colorPairs.get(computerPegs[1]).getKey()); }
+        if(computerPegs[1] != 0) { oldMovePeg2.setFill(colorPairs.get(computerPegs[1]).getKey()); }
         oldMovePeg2.setStroke(Color.BLACK);
         Rectangle oldMovePeg3 = new Rectangle(30,30, Color.rgb(0,0,0,0));
 //        if(computerPeg3Color != empty) { oldMovePeg3.setFill(computerPeg3Color.getKey()); }
-        if(computerPegs[2] != 0) { oldMovePeg1.setFill(colorPairs.get(computerPegs[2]).getKey()); }
+        if(computerPegs[2] != 0) { oldMovePeg3.setFill(colorPairs.get(computerPegs[2]).getKey()); }
         oldMovePeg3.setStroke(Color.BLACK);
         Rectangle oldMovePeg4 = new Rectangle(30,30, Color.rgb(0,0,0,0));
 //        if(computerPeg4Color != empty) { oldMovePeg4.setFill(computerPeg4Color.getKey()); }
-        if(computerPegs[3] != 0) { oldMovePeg1.setFill(colorPairs.get(computerPegs[3]).getKey()); }
+        if(computerPegs[3] != 0) { oldMovePeg4.setFill(colorPairs.get(computerPegs[3]).getKey()); }
         oldMovePeg4.setStroke(Color.BLACK);
 
         GridPane.setConstraints(oldMovePeg1, 0, 0, 1, 1, HPos.CENTER, VPos.CENTER, Priority.ALWAYS, Priority.ALWAYS, new Insets(0,0,0,10));
